@@ -16,7 +16,10 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rc04.expo-starter-kit"
+      "bundleIdentifier": "com.example.viro.expo",
+      "infoPlist": {
+        "NSCameraUsageDescription": "$(PRODUCT_NAME) uses the camera for AR functionality"
+      }
     },
     "android": {
       "adaptiveIcon": {

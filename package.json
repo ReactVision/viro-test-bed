@@ -6,7 +6,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "setup": "rm -rf node_modules yarn.lock package-lock.json ios .expo && yarn install && expo prebuild --clean -p ios --no-install && cd ios && pod install && cd .. && expo prebuild --clean -p android --no-install"
   },
   "dependencies": {
     "@viro-community/react-viro": "../viro",

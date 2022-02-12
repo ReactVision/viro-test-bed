@@ -25,7 +25,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.rc04.expo-starter-kit</string>
+          <string>com.example.viro.expo</string>
         </array>
       </dict>
     </array>
@@ -46,6 +46,8 @@
         </dict>
       </dict>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) uses the camera for AR functionality</string>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
