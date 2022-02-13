@@ -10,7 +10,7 @@
     "setup": "rm -rf node_modules yarn.lock package-lock.json ios .expo && yarn install && expo prebuild --clean -p ios --no-install && cd ios && pod install && cd .. && expo prebuild --clean -p android --no-install"
   },
   "dependencies": {
-    "@viro-community/react-viro": "../viro",
+    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.22.0.tgz",
     "expo": "~44.0.0",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",

@@ -1572,6 +1572,13 @@
     "@expo/config-plugins" "^4.0.16"
     react "^17.0.2"
 
+"@viro-community/react-viro@../viro/viro-community-react-viro-2.22.0.tgz":
+  version "2.22.0"
+  resolved "../viro/viro-community-react-viro-2.22.0.tgz#9f1b9ec464d2f4b5da1b583f49c0d7d3631f1ae8"
+  dependencies:
+    "@expo/config-plugins" "^4.0.16"
+    react "^17.0.2"
+
 "@xmldom/xmldom@~0.7.0":
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.5.tgz#09fa51e356d07d0be200642b0e4f91d8e6dd408d"
@@ -4017,9 +4024,9 @@ mimic-fn@^1.0.0:
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
 minimatch@^3.0.2, minimatch@^3.0.4:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.5.tgz#4da8f1290ee0f0f8e83d60ca69f8f134068604a3"
-  integrity sha512-tUpxzX0VAzJHjLu0xUfFv1gwVp9ba3IOuRAVH2EGuRW8a5emA2FlACLqiT/lDVtS1W+TGNwqz3sWaNyLgDJWuw==
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.0.tgz#f59168d5cba6b6fde15f6a88f557fe7eaf31d8ea"
+  integrity sha512-vgmUyWyt2qidcJXdF6e+kf4DgJha4vzf3ctWJ0uGjfvqEgoX2V4GXQt0eZwM2FJWKANfS8VmzpvPKbWYibkHZA==
   dependencies:
     brace-expansion "^1.1.7"
 
