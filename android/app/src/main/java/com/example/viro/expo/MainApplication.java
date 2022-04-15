@@ -1,4 +1,5 @@
 package com.example.viro.expo;
+import com.viromedia.bridge.ReactViroPackage;
 
 import android.app.Application;
 import android.content.Context;
@@ -20,8 +21,6 @@ import com.facebook.react.bridge.JSIModulePackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import com.viromedia.bridge.ReactViroPackage;
-
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHostWrapper(
     this,
@@ -35,7 +34,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
+      packages.add(new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("GVR")));
       packages.add(new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("AR")));
+      packages.add(new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("OVR_MOBILE")));
+
       // Packages that cannot be autolinked yet can be added manually here, for example:
       // packages.add(new MyReactNativePackage());
       return packages;
