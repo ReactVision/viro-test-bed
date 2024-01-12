@@ -10,8 +10,8 @@ Set up the development environment for [react native](https://reactnative.dev/do
 
 ## Installation
 
-1. `npm setup`
-2. Use android studio or ios xcode to run the application on a physical device.
+1. `npm install`
+2.
 
 ## How to Install Viro in an existing project?
 
