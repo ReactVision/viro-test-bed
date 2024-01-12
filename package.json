@@ -1,14 +1,13 @@
 {
-  "name": "expo-starter-kit",
+  "name": "expo-viro-starter-kit",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start --dev-client",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
+    "start": "set APP_VARIANT=development&& expo start --dev-client",
+    "android": "expo start --android",
+    "build-dev-client": "eas build -p ios --profile development",
+    "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject",
-    "setup": "rm -rf node_modules yarn.lock package-lock.json ios android .expo && yarn install && expo prebuild --clean -p ios --no-install && cd ios && pod install && cd .. && expo prebuild --clean -p android --no-install",
-    "setup:android": "yarn cache clean && rm -rf node_modules yarn.lock package-lock.json ios android .expo && yarn install && expo prebuild --clean -p android --no-install"
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "@viro-community/react-viro": "^2.23.0",
