@@ -11,7 +11,10 @@ Set up the development environment for [react native](https://reactnative.dev/do
 ## Installation
 
 1. `npm install`
-2.
+
+## Development Client
+
+1. TODO
 
 ## How to Install Viro in an existing project?
 
