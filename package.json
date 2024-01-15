@@ -10,7 +10,7 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
-    "@viro-community/react-viro": "^2.23.0",
+    "@viro-community/react-viro": "2.23.1-alpha",
     "expo": "^48.0.0",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
