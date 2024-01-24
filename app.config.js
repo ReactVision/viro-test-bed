@@ -31,6 +31,9 @@ module.exports = () => {
         config: {
           usesNonExemptEncryption: false,
         },
+        infoPlist: {
+          NSCameraUsageDescription: "$(PRODUCT_NAME) uses the camera to provide an AR experience."
+        }
       },
       android: {
         adaptiveIcon: {
