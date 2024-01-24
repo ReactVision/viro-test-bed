@@ -3,20 +3,20 @@ import {
   ViroARTrackingTargets,
   ViroScene,
   ViroVRSceneNavigator,
-} from '@viro-community/react-viro';
-import React from 'react';
+} from "@viro-community/react-viro";
+import React from "react";
 
 ViroARTrackingTargets.createTargets({
   targetOne: {
-    source: require('../../assets/cokecan.arobject'),
-    type: 'Object',
+    source: require("../../../assets/cokecan.arobject"),
+    type: "Object",
   },
 });
 
 const HelloWorldScene = () => {
   return (
     <ViroScene>
-      <Viro360Image source={require('../../assets/grid.jpeg')} />
+      <Viro360Image source={require("../../../assets/grid.jpeg")} />
     </ViroScene>
   );
 };

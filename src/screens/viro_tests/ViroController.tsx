@@ -3,15 +3,15 @@ import {
   ViroARSceneNavigator,
   ViroARTrackingTargets,
   ViroController,
-} from '@viro-community/react-viro';
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {handleTrackingUpdated} from '../../utils/handleTrackingUpdated';
+} from "@viro-community/react-viro";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { handleTrackingUpdated } from "../../utils/handleTrackingUpdated";
 
 ViroARTrackingTargets.createTargets({
   targetOne: {
-    source: require('../../assets/cokecan.arobject'),
-    type: 'Object',
+    source: require("../../../assets/cokecan.arobject"),
+    type: "Object",
   },
 });
 
@@ -21,7 +21,7 @@ const HelloWorldSceneAR = () => {
       <ViroController
         reticleVisibility={true}
         controllerVisibility={true}
-        onClick={() => console.log('onClick')}
+        onClick={() => console.log("onClick")}
       />
     </ViroARScene>
   );
@@ -40,12 +40,12 @@ export default () => {
 };
 
 var styles = StyleSheet.create({
-  f1: {flex: 1},
+  f1: { flex: 1 },
   helloWorldTextStyle: {
-    fontFamily: 'Arial',
+    fontFamily: "Arial",
     fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',
+    color: "#ffffff",
+    textAlignVertical: "center",
+    textAlign: "center",
   },
 });

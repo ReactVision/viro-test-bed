@@ -3,10 +3,10 @@ import {
   ViroARSceneNavigator,
   ViroMaterials,
   ViroParticleEmitter,
-} from '@viro-community/react-viro';
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {handleTrackingUpdated} from '../../utils/handleTrackingUpdated';
+} from "@viro-community/react-viro";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { handleTrackingUpdated } from "../../utils/handleTrackingUpdated";
 
 const HelloWorldSceneAR = () => {
   return (
@@ -20,7 +20,7 @@ const HelloWorldSceneAR = () => {
         loop={true}
         fixedToEmitter={true}
         image={{
-          source: require('../../assets/particle_snow.png'),
+          source: require("../../../assets/particle_snow.png"),
           height: 0.1,
           width: 0.1,
           bloomThreshold: 1.0,
@@ -29,7 +29,7 @@ const HelloWorldSceneAR = () => {
           particleLifetime: [4000, 4000],
           emissionRatePerSecond: [150, 200],
           spawnVolume: {
-            shape: 'box',
+            shape: "box",
             params: [20, 1, 20],
             spawnOnSurface: false,
           },
@@ -38,17 +38,17 @@ const HelloWorldSceneAR = () => {
         particleAppearance={{
           opacity: {
             initialRange: [0, 0],
-            factor: 'time',
+            factor: "time",
             interpolation: [
-              {endValue: 0.5, interval: [0, 500]},
-              {endValue: 1.0, interval: [4000, 5000]},
+              { endValue: 0.5, interval: [0, 500] },
+              { endValue: 1.0, interval: [4000, 5000] },
             ],
           },
 
           rotation: {
             initialRange: [0, 360],
-            factor: 'time',
-            interpolation: [{endValue: 1080, interval: [0, 5000]}],
+            factor: "time",
+            interpolation: [{ endValue: 1080, interval: [0, 5000] }],
           },
 
           scale: {
@@ -56,10 +56,10 @@ const HelloWorldSceneAR = () => {
               [5, 5, 5],
               [10, 10, 10],
             ],
-            factor: 'time',
+            factor: "time",
             interpolation: [
-              {endValue: [3, 3, 3], interval: [0, 4000]},
-              {endValue: [0, 0, 0], interval: [4000, 5000]},
+              { endValue: [3, 3, 3], interval: [0, 4000] },
+              { endValue: [0, 0, 0], interval: [4000, 5000] },
             ],
           },
         }}
@@ -79,8 +79,8 @@ const HelloWorldSceneAR = () => {
 ViroMaterials.createMaterials({
   test_material: {
     shininess: 2.0,
-    lightingModel: 'Lambert',
-    diffuseTexture: require('../../assets/360Test.mp4'),
+    lightingModel: "Lambert",
+    diffuseTexture: require("../../../assets/360Test.mp4"),
   },
 });
 
@@ -98,18 +98,18 @@ export default () => {
 
 ViroMaterials.createMaterials({
   heart: {
-    lightingModel: 'Blinn',
-    diffuseTexture: require('../../assets/grid.jpeg'),
+    lightingModel: "Blinn",
+    diffuseTexture: require("../../../assets/grid.jpeg"),
   },
 });
 
 var styles = StyleSheet.create({
-  f1: {flex: 1},
+  f1: { flex: 1 },
   helloWorldTextStyle: {
-    fontFamily: 'Arial',
+    fontFamily: "Arial",
     fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',
+    color: "#ffffff",
+    textAlignVertical: "center",
+    textAlign: "center",
   },
 });

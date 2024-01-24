@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "start": "set APP_VARIANT=development&& expo start --dev-client",
-    "android": "expo start --android",
+    "android": "expo run:android",
     "build-dev-client": "eas build -p ios --profile development",
-    "ios": "expo start --ios",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll"
   },
   "dependencies": {
-    "@viro-community/react-viro": "2.23.1-alpha",
+    "@viro-community/react-viro": "../tmp/viro/viro-community-react-viro-2.23.1-beta.tgz",
     "expo": "^49.0.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
