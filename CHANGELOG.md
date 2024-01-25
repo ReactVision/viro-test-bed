@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1/25/2024
+
+- Upgrade viro to 2.23.1-rc3
+
 ## 1/15/2024
 
 - Upgrade viro to 2.23.1-alpha
