@@ -5,15 +5,15 @@ const IS_DEV = process.env.APP_VARIANT === "development";
 module.exports = () => {
   return {
     expo: {
-      name: IS_DEV ? "NativeVision Demo (Dev)" : "NativeVision Demo",
+      name: IS_DEV ? "NativeVision (Dev)" : "NativeVision",
       slug: "native-vision-demo" + (IS_DEV ? "-dev" : ""),
       version: packageJson.version,
       orientation: "portrait",
-      icon: "./assets/images/icon.png",
+      icon: `./assets/images/icon${IS_DEV ? "-dev" : ""}.png`,
       scheme: "myapp",
       userInterfaceStyle: "automatic",
       splash: {
-        image: "./assets/images/splash.png",
+        image: `./assets/images/splash${IS_DEV ? "-dev" : ""}.png`,
         resizeMode: "contain",
         backgroundColor: "#ffffff",
       },
@@ -34,7 +34,7 @@ module.exports = () => {
       },
       android: {
         adaptiveIcon: {
-          foregroundImage: "./assets/images/adaptive-icon.png",
+          foregroundImage: `./assets/images/adaptive-icon${IS_DEV ? "-dev" : ""}.png`,
           backgroundColor: "#ffffff",
         },
         package: IS_DEV ? "com.rc04.nativevision.dev" : "com.rc04.nativevision",
