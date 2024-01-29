@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Linking,
   Pressable,
@@ -277,10 +277,12 @@ export default () => {
               </Text>
             </View>
             <Pressable
-              onPress={() => Linking.openURL("https://github.com/NS-BOBBY-C")}
+              onPress={() =>
+                Linking.openURL("https://github.com/robertjcolley")
+              }
               style={styles.bobbyButton}
             >
-              <Text style={styles.buttonText}>Built by NS-BOBBY-C</Text>
+              <Text style={styles.buttonText}>Built by Robert Colley</Text>
             </Pressable>
             {/* General Demos */}
             <View style={styles.header}>

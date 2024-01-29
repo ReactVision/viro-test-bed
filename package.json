@@ -1,5 +1,5 @@
 {
-  "name": "expo-viro-starter-kit",
+  "name": "viro-test-bed",
   "version": "1.0.0",
   "scripts": {
     "start": "set APP_VARIANT=development&& expo start --dev-client",
@@ -10,7 +10,7 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
-    "@viro-community/react-viro": "2.23.1",
+    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.23.1-15.tgz",
     "expo": "^50.0.0",
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",
