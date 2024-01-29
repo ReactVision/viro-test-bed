@@ -1,24 +1,14 @@
-# Viro Expo Starter Kit
+# Viro Test Bed
 
-This is a blank Expo project setup with Viro. As of 2.23.0, Viro supports Expo!
+This is a project that [@robertjcolley](https://github.com/robertjcolley) uses to verify issues and questions with the Viro project.
 
-## Prerequisites
-
-Set up the development environment for [react native](https://reactnative.dev/docs/environment-setup).
-
-> ⚠️ NOTE: The android emulators and the ios simulators are not supported by Viro. See [this](https://viro-community.readme.io/docs/frequently-asked-questions#does-this-work-with-ios-simulators-or-android-emulators). Run this project on a physical device!
-
-## Installation
+## Setup
 
 1. `npm install`
 
-## Development Client
+## Building Expo Development Client (Using EAS)
 
 1. TODO
-
-## How to Install Viro in an existing project?
-
-If you are integrating ViroReact into an existing project, have a look at our [Installation instructions](https://github.com/ViroCommunity/viro/blob/main/readmes/INSTALL.md).
 
 ## Need help?
 
