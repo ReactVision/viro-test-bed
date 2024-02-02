@@ -29,6 +29,7 @@ import Issue62 from "./src/screens/github_issues/Issue62";
 import Issue74 from "./src/screens/github_issues/Issue74";
 import Issue75 from "./src/screens/github_issues/Issue75";
 // PLOP GITHB ISSUE IMPORT
+import Issue254 from "./src/screens/github_issues/Issue254";
 
 // Tests
 import Viro360Image from "./src/screens/viro_tests/Viro360Image";
@@ -136,6 +137,7 @@ const github_issues = [
   "74",
   "75",
   // PLOP GITHB ISSUE NUMBER
+  "254",
 ];
 
 const discord_issues = [
@@ -303,6 +305,8 @@ export default () => {
       case "75":
         return <Issue75 />;
       // PLOP GITHB ISSUE COMPONENT
+      case "254":
+        return <Issue254 />;
 
       default:
         return (

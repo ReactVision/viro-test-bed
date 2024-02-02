@@ -11,7 +11,7 @@
     "install-local": "node scripts/installFromLocalViro.js"
   },
   "dependencies": {
-    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.23.1-dev-1706738655659.tgz",
+    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.23.1-dev-1706907672791-dev-1706908491247.tgz",
     "expo": "^50.0.0",
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",
