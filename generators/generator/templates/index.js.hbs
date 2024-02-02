@@ -1,0 +1,32 @@
+/** 
+ * {{titleCase name}} Generator 
+ * 
+ * See https://plopjs.com for more. 
+ */ 
+
+const type = "{{dashCase name}}"; 
+
+const config = { 
+  description: "Create a new {{titleCase name}}", 
+  prompts: [ 
+    { 
+      type: "input", 
+      name: "name", 
+      message: "Please enter a name for your new {{titleCase name}}", 
+    }, 
+  ], 
+  actions() { 
+    // TODO: Remove this and add actions
+    return []; 
+    
+    return [ 
+      { 
+        type: "add", 
+        path: "path/to/destination", 
+        templateFile: `generators/${type}/templates/TODO.hbs`, 
+      }, 
+    ]; 
+  }, 
+};
+
+module.exports = { type, config, };

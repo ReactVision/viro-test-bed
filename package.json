@@ -7,10 +7,11 @@
     "build-dev-client": "eas build -p ios --profile development",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "install-local": "node scripts/installFromLocalViro.js"
   },
   "dependencies": {
-    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.23.1-15.tgz",
+    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.23.1-dev-1706738655659.tgz",
     "expo": "^50.0.0",
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Linking,
   Pressable,
@@ -7,17 +7,30 @@ import {
   Text,
   View,
 } from "react-native";
+import packageJson from "./package.json";
+
+// Demos
 import AR from "./src/screens/demos/AR";
+import ThreeD from "./src/screens/demos/ThreeD";
 import VR from "./src/screens/demos/VR";
-import OGSnowE01292022 from "./src/screens/discord_issues/OGSnowE_01292022";
+// Discord Issues
+import CheethKeeth01252022 from "./src/screens/discord_issues/CheethKeeth_01252022";
 import CheethKeeth12202021 from "./src/screens/discord_issues/CheethKeeth_12202021";
-import { CheethKeeth01252022 } from "./src/screens/discord_issues/CheethKeeth_01252022";
+import OGSnowE01292022 from "./src/screens/discord_issues/OGSnowE_01292022";
 import VV12202021 from "./src/screens/discord_issues/VV_12202021";
+// PLOP DISCORD ISSUE IMPORT
+
+// GitHub Issues
 import Issue24 from "./src/screens/github_issues/Issue24";
 import Issue31 from "./src/screens/github_issues/Issue31";
 import Issue41 from "./src/screens/github_issues/Issue41";
 import Issue58 from "./src/screens/github_issues/Issue58";
 import Issue62 from "./src/screens/github_issues/Issue62";
+import Issue74 from "./src/screens/github_issues/Issue74";
+import Issue75 from "./src/screens/github_issues/Issue75";
+// PLOP GITHB ISSUE IMPORT
+
+// Tests
 import Viro360Image from "./src/screens/viro_tests/Viro360Image";
 import Viro360Video from "./src/screens/viro_tests/Viro360Video";
 import Viro3DObject from "./src/screens/viro_tests/Viro3DObject";
@@ -52,10 +65,6 @@ import ViroSpinner from "./src/screens/viro_tests/ViroSpinner";
 import ViroSpotLight from "./src/screens/viro_tests/ViroSpotLight";
 import ViroText from "./src/screens/viro_tests/ViroText";
 import ViroVideo from "./src/screens/viro_tests/ViroVideo";
-import packageJson from "./package.json";
-import Issue74 from "./src/screens/github_issues/Issue74";
-import Issue75 from "./src/screens/github_issues/Issue75";
-
 // import ViroARObjectMarker from './src/screens/viro_tests/ViroARObjectMarker';
 
 const viro_tests = [
@@ -115,9 +124,19 @@ const viro_tests = [
 const demos = [
   { title: "AR Demo", id: "AR" },
   { title: "VR Demo", id: "VR" },
+  { title: "3D Demo", id: "3D" },
 ];
 
-const github_issues = ["24", "31", "41", "58", "62", "74", "75"];
+const github_issues = [
+  "24",
+  "31",
+  "41",
+  "58",
+  "62",
+  "74",
+  "75",
+  // PLOP GITHB ISSUE NUMBER
+];
 
 const discord_issues = [
   {
@@ -140,10 +159,15 @@ const discord_issues = [
     id: "VV_12202021",
     link: "https://discord.com/channels/774471080713781259/774471080713781263/922595857415688232",
   },
+  // PLOP DISCORD ISSUE NUMBER
 ];
 
 export default () => {
   const [view, setView] = useState("HOME");
+  const [testsExpanded, setTestsExpanded] = useState(false);
+  const [demosExpanded, setDemosExpanded] = useState(false);
+  const [githubExpanded, setGithubExpanded] = useState(false);
+  const [discordExpanded, setDiscordExpanded] = useState(false);
 
   const handleClickGitHubLink = (id: string) => {
     Linking.openURL(`https://github.com/ViroCommunity/viro/issues/${id}`);
@@ -151,6 +175,22 @@ export default () => {
 
   const handleClickDiscordLink = (link: any) => {
     Linking.openURL(link);
+  };
+
+  const handlePressTests = () => {
+    setTestsExpanded((cur) => !cur);
+  };
+
+  const handlePressDemos = () => {
+    setDemosExpanded((cur) => !cur);
+  };
+
+  const handlePressGitHub = () => {
+    setGithubExpanded((cur) => !cur);
+  };
+
+  const handlePressDiscord = () => {
+    setDiscordExpanded((cur) => !cur);
   };
 
   const renderScene = () => {
@@ -231,6 +271,8 @@ export default () => {
         return <AR />;
       case "VR":
         return <VR />;
+      case "3D":
+        return <ThreeD />;
 
       // Discord Issues
       case "OGSnowE01292022":
@@ -241,6 +283,7 @@ export default () => {
         return <CheethKeeth12202021 />;
       case "VV_12202021":
         return <VV12202021 />;
+      // PLOP DISCORD ISSUE COMPONENT
 
       // GitHub Issues
       case "24":
@@ -259,6 +302,8 @@ export default () => {
         return <Issue75 />;
       case "75":
         return <Issue75 />;
+      // PLOP GITHB ISSUE COMPONENT
+
       default:
         return (
           <ScrollView
@@ -286,70 +331,89 @@ export default () => {
             </Pressable>
             {/* General Demos */}
             <View style={styles.header}>
-              <Text style={styles.subheaderText}>Viro Tests</Text>
+              <Text style={styles.subheaderText} onPress={handlePressTests}>
+                {testsExpanded ? "-" : "+"} Viro Tests
+              </Text>
             </View>
-            {viro_tests.map((demo) => (
-              <Pressable
-                key={demo}
-                onPress={() => setView(demo)}
-                style={styles.viroTestButton}
-              >
-                <Text style={styles.buttonText}>{demo}</Text>
-              </Pressable>
-            ))}
+            {testsExpanded
+              ? viro_tests.map((demo) => (
+                  <Pressable
+                    key={demo}
+                    onPress={() => setView(demo)}
+                    style={styles.viroTestButton}
+                  >
+                    <Text style={styles.buttonText}>{demo}</Text>
+                  </Pressable>
+                ))
+              : null}
 
             {/* General Demos */}
             <View style={styles.header}>
-              <Text style={styles.subheaderText}>General Usage</Text>
+              <Text style={styles.subheaderText} onPress={handlePressDemos}>
+                {demosExpanded ? "-" : "+"} Demos
+              </Text>
             </View>
-            {demos.map((demo) => (
-              <Pressable
-                key={demo.id}
-                onPress={() => setView(demo.id)}
-                style={styles.button}
-              >
-                <Text style={styles.buttonText}>{demo.title}</Text>
-              </Pressable>
-            ))}
+            {demosExpanded
+              ? demos.map((demo) => (
+                  <Pressable
+                    key={demo.id}
+                    onPress={() => setView(demo.id)}
+                    style={styles.button}
+                  >
+                    <Text style={styles.buttonText}>{demo.title}</Text>
+                  </Pressable>
+                ))
+              : null}
 
             {/* Issues from GitHub */}
             <View style={styles.header}>
-              <Text style={styles.subheaderText}>GitHub Issues</Text>
+              <Text style={styles.subheaderText} onPress={handlePressGitHub}>
+                {githubExpanded ? "-" : "+"} GitHub Issues
+              </Text>
             </View>
-            {github_issues.map((issue) => (
-              <View key={issue} style={styles.issue}>
-                <Pressable onPress={() => setView(issue)} style={styles.button}>
-                  <Text style={styles.buttonText}>Issue #{issue}</Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => handleClickGitHubLink(issue)}
-                  style={styles.link}
-                >
-                  <Text style={styles.buttonText}>GitHub Link</Text>
-                </Pressable>
-              </View>
-            ))}
+            {githubExpanded
+              ? github_issues.map((issue) => (
+                  <View key={issue} style={styles.issue}>
+                    <Pressable
+                      onPress={() => setView(issue)}
+                      style={styles.button}
+                    >
+                      <Text style={styles.buttonText}>Issue #{issue}</Text>
+                    </Pressable>
+                    <Pressable
+                      onPress={() => handleClickGitHubLink(issue)}
+                      style={styles.link}
+                    >
+                      <Text style={styles.buttonText}>GitHub Link</Text>
+                    </Pressable>
+                  </View>
+                ))
+              : null}
 
             {/* Discord Issues */}
             <View style={styles.header}>
-              <Text style={styles.subheaderText}>Discord Issues</Text>
+              <Text style={styles.subheaderText} onPress={handlePressDiscord}>
+                {discordExpanded ? "-" : "+"} Discord Issues
+              </Text>
             </View>
-            {discord_issues.map((issue) => (
-              <View key={issue.id} style={styles.issue}>
-                <Pressable
-                  onPress={() => setView(issue.id)}
-                  style={styles.button}
-                >
-                  <Text style={styles.buttonText}>{issue.title}</Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => handleClickDiscordLink(issue.link)}
-                  style={styles.discordLink}
-                >
-                  <Text style={styles.buttonText}>Message</Text>
-                </Pressable>
-              </View>
-            ))}
+            {discordExpanded
+              ? discord_issues.map((issue) => (
+                  <View key={issue.id} style={styles.issue}>
+                    <Pressable
+                      onPress={() => setView(issue.id)}
+                      style={styles.button}
+                    >
+                      <Text style={styles.buttonText}>{issue.title}</Text>
+                    </Pressable>
+                    <Pressable
+                      onPress={() => handleClickDiscordLink(issue.link)}
+                      style={styles.discordLink}
+                    >
+                      <Text style={styles.buttonText}>Message</Text>
+                    </Pressable>
+                  </View>
+                ))
+              : null}
           </ScrollView>
         );
     }
@@ -420,7 +484,7 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     flex: 2,
     marginRight: 10,
-    backgroundColor: "#6C3483",
+    backgroundColor: "#025ced",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

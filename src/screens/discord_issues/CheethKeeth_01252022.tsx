@@ -72,7 +72,7 @@ export const ARRenderer = (props: any) => {
   );
 };
 
-export const CheethKeeth01252022 = () => {
+const CheethKeeth01252022 = () => {
   return (
     <ARRenderer
       target={
@@ -84,6 +84,7 @@ export const CheethKeeth01252022 = () => {
     />
   );
 };
+export default CheethKeeth01252022;
 
 var styles = StyleSheet.create({
   f1: {
