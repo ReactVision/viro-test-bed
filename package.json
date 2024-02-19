@@ -8,23 +8,25 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "install-local": "node scripts/installFromLocalViro.js"
+    "install-local": "node scripts/installFromLocalViro.js",
+    "install-local-android": "npm run install-local && ./scripts/install_android.sh",
+    "install-local-ios": "npm run install-local && ./scripts/install_ios.sh"
   },
   "dependencies": {
-    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.23.1-dev-1706907672791-dev-1706908491247.tgz",
-    "expo": "^50.0.0",
+    "@viro-community/react-viro": "2.40.1",
+    "expo": "~50.0.7",
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.2",
-    "expo-dev-client": "~3.3.7"
+    "react-native": "0.73.4",
+    "expo-dev-client": "~3.3.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
     "jest": "^29.3.1",
-    "jest-expo": "^50.0.0",
+    "jest-expo": "~50.0.2",
     "typescript": "^5.3.0"
   },
   "private": true

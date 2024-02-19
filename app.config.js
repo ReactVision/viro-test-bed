@@ -21,7 +21,9 @@ module.exports = () => {
         fallbackToCacheTimeout: 0,
       },
       assetBundlePatterns: ["**/*"],
-      plugins: ["@viro-community/react-viro"],
+      plugins: [
+        ["@viro-community/react-viro", { android: { xRMode: ["GVR", "AR"] } }],
+      ],
       ios: {
         supportsTablet: true,
         bundleIdentifier: IS_DEV
@@ -34,7 +36,9 @@ module.exports = () => {
       },
       android: {
         adaptiveIcon: {
-          foregroundImage: `./assets/images/adaptive-icon${IS_DEV ? "-dev" : ""}.png`,
+          foregroundImage: `./assets/images/adaptive-icon${
+            IS_DEV ? "-dev" : ""
+          }.png`,
           backgroundColor: "#ffffff",
         },
         package: IS_DEV ? "com.rc04.nativevision.dev" : "com.rc04.nativevision",

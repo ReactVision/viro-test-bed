@@ -4,7 +4,7 @@ import {
   ViroText,
 } from "@viro-community/react-viro";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { handleTrackingUpdated } from "../../utils/handleTrackingUpdated";
 
 const HelloWorldSceneAR = () => {
@@ -14,7 +14,7 @@ const HelloWorldSceneAR = () => {
         text="Hello World!"
         width={2}
         height={2}
-        position={[0, 0, -2]}
+        position={[0, 0, 2]}
         style={styles.helloWorldTextStyle}
       />
     </ViroScene>

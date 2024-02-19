@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Linking,
+  NativeModules,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import packageJson from "./package.json";
-
+import * as SplashScreen from "expo-splash-screen";
+import { VIRO_VERSION } from "@viro-community/react-viro";
 // Demos
 import AR from "./src/screens/demos/AR";
 import ThreeD from "./src/screens/demos/ThreeD";
@@ -66,6 +69,7 @@ import ViroSpinner from "./src/screens/viro_tests/ViroSpinner";
 import ViroSpotLight from "./src/screens/viro_tests/ViroSpotLight";
 import ViroText from "./src/screens/viro_tests/ViroText";
 import ViroVideo from "./src/screens/viro_tests/ViroVideo";
+import { isARSupportedOnDevice } from "@viro-community/react-viro";
 // import ViroARObjectMarker from './src/screens/viro_tests/ViroARObjectMarker';
 
 const viro_tests = [
@@ -170,6 +174,11 @@ export default () => {
   const [demosExpanded, setDemosExpanded] = useState(false);
   const [githubExpanded, setGithubExpanded] = useState(false);
   const [discordExpanded, setDiscordExpanded] = useState(false);
+  const [isArSupported, setIsArSupported] = useState<boolean>();
+  const [loadingIsArSupported, setLoadingIsArSupported] = useState(false);
+  useEffect(() => {
+    SplashScreen.hideAsync();
+  }, []);
 
   const handleClickGitHubLink = (id: string) => {
     Linking.openURL(`https://github.com/ViroCommunity/viro/issues/${id}`);
@@ -193,6 +202,19 @@ export default () => {
 
   const handlePressDiscord = () => {
     setDiscordExpanded((cur) => !cur);
+  };
+
+  const handlePressIsArSupported = async () => {
+    setLoadingIsArSupported(true);
+    try {
+      const result = await isARSupportedOnDevice();
+      setIsArSupported(result.isARSupported);
+    } catch (err) {
+      console.error(err);
+      setIsArSupported(false);
+    } finally {
+      setLoadingIsArSupported(false);
+    }
   };
 
   const renderScene = () => {
@@ -317,13 +339,14 @@ export default () => {
             <View style={styles.header}>
               <Text style={styles.headerText}>Viro Test App</Text>
               <Text>
-                Viro Version:{" "}
+                Viro package.json Version:{" "}
                 {(
                   packageJson.dependencies[
                     "@viro-community/react-viro"
                   ] as string
                 ).replace("^", "")}
               </Text>
+              <Text>ViroUtils Version: {VIRO_VERSION}</Text>
             </View>
             <Pressable
               onPress={() =>
@@ -333,6 +356,18 @@ export default () => {
             >
               <Text style={styles.buttonText}>Built by Robert Colley</Text>
             </Pressable>
+            {/* AR Supoprted */}
+            <View>
+              <Pressable
+                onPress={handlePressIsArSupported}
+                style={styles.viroTestButton}
+              >
+                <Text style={styles.buttonText}>Query AR Support</Text>
+              </Pressable>
+              {isArSupported !== undefined && !loadingIsArSupported ? (
+                <Text>AR Support: {isArSupported ? "True" : "False"}</Text>
+              ) : null}
+            </View>
             {/* General Demos */}
             <View style={styles.header}>
               <Text style={styles.subheaderText} onPress={handlePressTests}>
@@ -427,9 +462,12 @@ export default () => {
     <React.Fragment>
       {renderScene()}
       {view !== "HOME" ? (
-        <Pressable onPress={() => setView("HOME")} style={styles.homeButton}>
+        <TouchableOpacity
+          onPress={() => setView("HOME")}
+          style={styles.homeButton}
+        >
           <Text style={styles.buttonText}>Home</Text>
-        </Pressable>
+        </TouchableOpacity>
       ) : null}
     </React.Fragment>
   );

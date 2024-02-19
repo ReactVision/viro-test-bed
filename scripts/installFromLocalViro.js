@@ -38,6 +38,6 @@ testBedPackageJson.dependencies[
 ] = `../viro/viro-community-react-viro-${newVersion}.tgz`;
 writeFileSync("./package.json", JSON.stringify(testBedPackageJson, null, 2));
 
-console.log(" ==> npm install && npm run start");
-// && npm i && npm run start
+console.log(" ==> npm install");
+// && npm i
 execSync("npm i");

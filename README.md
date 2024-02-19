@@ -5,6 +5,7 @@ This is a project that [@robertjcolley](https://github.com/robertjcolley) uses t
 ## Setup
 
 1. `npm install`
+2. `npm run start`
 
 ## Building Expo Development Client (Using EAS)
 
