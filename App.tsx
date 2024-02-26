@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Linking,
   NativeModules,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -11,6 +12,8 @@ import {
 } from "react-native";
 import packageJson from "./package.json";
 import * as SplashScreen from "expo-splash-screen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { VIRO_VERSION } from "@viro-community/react-viro";
 // Demos
 import AR from "./src/screens/demos/AR";
@@ -71,6 +74,8 @@ import ViroText from "./src/screens/viro_tests/ViroText";
 import ViroVideo from "./src/screens/viro_tests/ViroVideo";
 import { isARSupportedOnDevice } from "@viro-community/react-viro";
 // import ViroARObjectMarker from './src/screens/viro_tests/ViroARObjectMarker';
+
+const ASYNC_STORAGE_RELEASE_TEST_ID = "release-test";
 
 const viro_tests = [
   "Viro360Image",
@@ -168,6 +173,11 @@ const discord_issues = [
   // PLOP DISCORD ISSUE NUMBER
 ];
 
+interface ViroTestResult {
+  id: string;
+  result: "pass" | "fail";
+}
+
 export default () => {
   const [view, setView] = useState("HOME");
   const [testsExpanded, setTestsExpanded] = useState(false);
@@ -176,12 +186,23 @@ export default () => {
   const [discordExpanded, setDiscordExpanded] = useState(false);
   const [isArSupported, setIsArSupported] = useState<boolean>();
   const [loadingIsArSupported, setLoadingIsArSupported] = useState(false);
+  const [releaseTestResults, setReleaseTestResults] = useState<
+    ViroTestResult[]
+  >([]);
+
   useEffect(() => {
-    SplashScreen.hideAsync();
+    (async () => {
+      await SplashScreen.hideAsync();
+      const value = await AsyncStorage.getItem(ASYNC_STORAGE_RELEASE_TEST_ID);
+      if (value) {
+        const releaseTest = JSON.parse(value);
+        setReleaseTestResults(releaseTest[Platform.OS]);
+      }
+    })();
   }, []);
 
   const handleClickGitHubLink = (id: string) => {
-    Linking.openURL(`https://github.com/ViroCommunity/viro/issues/${id}`);
+    Linking.openURL(`https://github.com/NativeVision/viro/issues/${id}`);
   };
 
   const handleClickDiscordLink = (link: any) => {
@@ -202,6 +223,53 @@ export default () => {
 
   const handlePressDiscord = () => {
     setDiscordExpanded((cur) => !cur);
+  };
+
+  const handlePressResetReleaseTest = async () => {
+    setReleaseTestResults([]);
+
+    await AsyncStorage.removeItem(ASYNC_STORAGE_RELEASE_TEST_ID);
+  };
+
+  const handlePressPassFailTest = (testId: string, pass: boolean) => {
+    const newReleaseTestResults: ViroTestResult[] = [
+      ...releaseTestResults.filter((item) => item.id !== testId),
+      { id: testId, result: pass ? "pass" : "fail" },
+    ];
+    AsyncStorage.setItem(
+      ASYNC_STORAGE_RELEASE_TEST_ID,
+      JSON.stringify({
+        [Platform.OS]: releaseTestResults,
+      })
+    );
+    setReleaseTestResults(newReleaseTestResults);
+  };
+
+  const handlePressPrintReleaseTestResults = () => {
+    let toPrint =
+      "\n==============================================================\n\n";
+    toPrint +=
+      "NativeVision Release Test Results: " +
+      Platform.OS +
+      "\n" +
+      VIRO_VERSION +
+      "\n" +
+      packageJson.dependencies["@viro-community/react-viro"] +
+      "\n" +
+      new Date().toLocaleDateString() +
+      " " +
+      new Date().toLocaleTimeString() +
+      "\n\n";
+
+    for (const testObject of releaseTestResults) {
+      toPrint +=
+        (testObject.result === "pass" ? "✅ PASS - " : "❌ FAIL - ") +
+        testObject.id +
+        "\n";
+    }
+    toPrint +=
+      "\n==============================================================\n";
+    console.log(toPrint);
   };
 
   const handlePressIsArSupported = async () => {
@@ -340,34 +408,55 @@ export default () => {
               <Text style={styles.headerText}>Viro Test App</Text>
               <Text>
                 Viro package.json Version:{" "}
-                {(
+                {
                   packageJson.dependencies[
                     "@viro-community/react-viro"
                   ] as string
-                ).replace("^", "")}
+                }
               </Text>
               <Text>ViroUtils Version: {VIRO_VERSION}</Text>
             </View>
-            <Pressable
+            <TouchableOpacity
               onPress={() =>
                 Linking.openURL("https://github.com/robertjcolley")
               }
               style={styles.bobbyButton}
             >
               <Text style={styles.buttonText}>Built by Robert Colley</Text>
-            </Pressable>
+            </TouchableOpacity>
             {/* AR Supoprted */}
             <View>
-              <Pressable
+              <TouchableOpacity
                 onPress={handlePressIsArSupported}
                 style={styles.viroTestButton}
               >
                 <Text style={styles.buttonText}>Query AR Support</Text>
-              </Pressable>
+              </TouchableOpacity>
               {isArSupported !== undefined && !loadingIsArSupported ? (
                 <Text>AR Support: {isArSupported ? "True" : "False"}</Text>
               ) : null}
             </View>
+            {/* Release Testing */}
+            <View>
+              <TouchableOpacity
+                onPress={handlePressResetReleaseTest}
+                style={styles.viroTestButton}
+              >
+                <Text style={styles.buttonText}>Reset Release Test</Text>
+              </TouchableOpacity>
+            </View>
+            {releaseTestResults.length > 0 ? (
+              <View>
+                <TouchableOpacity
+                  onPress={handlePressPrintReleaseTestResults}
+                  style={styles.viroTestButton}
+                >
+                  <Text style={styles.buttonText}>
+                    Print Release Test Results
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
             {/* General Demos */}
             <View style={styles.header}>
               <Text style={styles.subheaderText} onPress={handlePressTests}>
@@ -375,15 +464,45 @@ export default () => {
               </Text>
             </View>
             {testsExpanded
-              ? viro_tests.map((demo) => (
-                  <Pressable
-                    key={demo}
-                    onPress={() => setView(demo)}
-                    style={styles.viroTestButton}
-                  >
-                    <Text style={styles.buttonText}>{demo}</Text>
-                  </Pressable>
-                ))
+              ? viro_tests.map((demo) => {
+                  const result = releaseTestResults.find(
+                    (item) => item.id === demo
+                  );
+                  const isDone = result !== undefined;
+                  const didPass = result?.result === "pass";
+
+                  return (
+                    <View key={demo} style={styles.issue}>
+                      <TouchableOpacity
+                        key={demo}
+                        onPress={() => setView(demo)}
+                        style={styles.viroTestButton}
+                      >
+                        <Text style={styles.buttonText}>{demo}</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={
+                          isDone && didPass
+                            ? styles.passButton
+                            : styles.donePassButton
+                        }
+                        onPress={() => handlePressPassFailTest(demo, true)}
+                      >
+                        <Text style={styles.buttonText}>PASS</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={
+                          isDone && !didPass
+                            ? styles.failButton
+                            : styles.doneFailButton
+                        }
+                        onPress={() => handlePressPassFailTest(demo, false)}
+                      >
+                        <Text style={styles.buttonText}>FAIL</Text>
+                      </TouchableOpacity>
+                    </View>
+                  );
+                })
               : null}
 
             {/* General Demos */}
@@ -474,6 +593,65 @@ export default () => {
 };
 
 var styles = StyleSheet.create({
+  releaseTestContainer: {
+    position: "absolute",
+    bottom: 40,
+    left: 40,
+    right: 40,
+  },
+  testingButtons: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  passButton: {
+    marginBottom: 10,
+    flex: 1,
+    marginRight: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "#50C878",
+  },
+  failButton: {
+    marginBottom: 10,
+    flex: 1,
+    marginLeft: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "#EE4B2B",
+  },
+  donePassButton: {
+    marginBottom: 10,
+    flex: 1,
+    marginRight: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "gray",
+  },
+  doneFailButton: {
+    marginBottom: 10,
+    flex: 1,
+    marginLeft: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "gray",
+  },
+  currentTestText: {
+    backgroundColor: "#fff",
+    marginBottom: 10,
+    padding: 5,
+  },
   home: {
     backgroundColor: "#fff",
     flex: 1,
@@ -535,14 +713,14 @@ var styles = StyleSheet.create({
   },
   viroTestButton: {
     marginBottom: 10,
-    flex: 2,
+    flex: 5,
     marginRight: 10,
-    backgroundColor: "#ff3f5f",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
     borderRadius: 10,
+    backgroundColor: "#ff3f5f",
   },
   homeButton: {
     position: "absolute",
