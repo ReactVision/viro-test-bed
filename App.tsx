@@ -35,6 +35,7 @@ import Issue62 from "./src/screens/github_issues/Issue62";
 import Issue74 from "./src/screens/github_issues/Issue74";
 import Issue75 from "./src/screens/github_issues/Issue75";
 // PLOP GITHB ISSUE IMPORT
+import Issue272 from "./src/screens/github_issues/Issue272";
 import Issue254 from "./src/screens/github_issues/Issue254";
 
 // Tests
@@ -146,6 +147,7 @@ const github_issues = [
   "74",
   "75",
   // PLOP GITHB ISSUE NUMBER
+  "272",
   "254",
 ];
 
@@ -395,6 +397,8 @@ export default () => {
       case "75":
         return <Issue75 />;
       // PLOP GITHB ISSUE COMPONENT
+      case "272":
+        return <Issue272 />;
       case "254":
         return <Issue254 />;
 
@@ -530,22 +534,24 @@ export default () => {
               </Text>
             </View>
             {githubExpanded
-              ? github_issues.map((issue) => (
-                  <View key={issue} style={styles.issue}>
-                    <Pressable
-                      onPress={() => setView(issue)}
-                      style={styles.button}
-                    >
-                      <Text style={styles.buttonText}>Issue #{issue}</Text>
-                    </Pressable>
-                    <Pressable
-                      onPress={() => handleClickGitHubLink(issue)}
-                      style={styles.link}
-                    >
-                      <Text style={styles.buttonText}>GitHub Link</Text>
-                    </Pressable>
-                  </View>
-                ))
+              ? github_issues
+                  .sort((a, b) => parseInt(b) - parseInt(a))
+                  .map((issue) => (
+                    <View key={issue} style={styles.issue}>
+                      <Pressable
+                        onPress={() => setView(issue)}
+                        style={styles.button}
+                      >
+                        <Text style={styles.buttonText}>Issue #{issue}</Text>
+                      </Pressable>
+                      <Pressable
+                        onPress={() => handleClickGitHubLink(issue)}
+                        style={styles.link}
+                      >
+                        <Text style={styles.buttonText}>GitHub Link</Text>
+                      </Pressable>
+                    </View>
+                  ))
               : null}
 
             {/* Discord Issues */}
