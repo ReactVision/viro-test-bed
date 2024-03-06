@@ -13,14 +13,15 @@
     "install-local-ios": "npm run install-local && ./scripts/install_ios.sh"
   },
   "dependencies": {
-    "@viro-community/react-viro": "2.40.1",
+    "@react-native-async-storage/async-storage": "^1.22.3",
+    "@viro-community/react-viro": "../viro/viro-community-react-viro-2.41.1-dev-1709754021414.tgz",
     "expo": "~50.0.7",
+    "expo-dev-client": "~3.3.8",
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.4",
-    "expo-dev-client": "~3.3.8"
+    "react-native": "0.73.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
